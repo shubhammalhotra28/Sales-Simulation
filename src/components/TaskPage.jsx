@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Storage } from 'aws-amplify';
 import MicRecorder from 'mic-recorder-to-mp3';
 import { API } from 'aws-amplify';
+import { TailSpin } from 'react-loader-spinner';
 
 const TaskPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const TaskPage = () => {
   const [recording, setRecording] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [recorder, setRecorder] = useState(null);
 
   useEffect(() => {
@@ -61,6 +63,7 @@ const TaskPage = () => {
 
   const handleSubmit = async () => {
     console.log('Submitting recording...');
+    setIsLoading(true);
     try {
       const email = candidate.email || 'unknown_user';  // Use candidate's email or 'unknown_user' if not available
       const audioKey = `public/${email}/${getFormattedDateTime()}.mp3`;  // Custom key with email and timestamp
@@ -90,9 +93,11 @@ const TaskPage = () => {
       console.log(data);
       console.log('done');
 
+      setIsLoading(false);
       navigate('/feedback', { state: { candidate } });  // Pass candidate data to FeedbackPage
     } catch (error) {
       console.error('Error uploading audio:', error);
+      setIsLoading(false);
     }
   };
 
@@ -115,10 +120,11 @@ const TaskPage = () => {
         <button style={{ ...styles.button, ...(!recording ? styles.disabledButton : styles.activeButton) }} onClick={handleRerecord} disabled={!recording}>
           Re-record
         </button>
-        <button style={styles.submitButton} onClick={handleSubmit} disabled={!recording}>
+        <button style={styles.submitButton} onClick={handleSubmit} disabled={!recording || isLoading}>
           Submit
         </button>
       </div>
+      {isLoading && <div style={styles.loaderContainer}><TailSpin color="#00BFFF" height={80} width={80} /></div>}
       <br />
       <Link to="/" style={styles.link}>Cancel and Return to Landing Page</Link>
     </div>
@@ -177,6 +183,11 @@ const styles = {
   },
   activeButton: {
     backgroundColor: '#dc3545',
+  },
+  loaderContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '20px',
   },
   link: {
     display: 'block',
