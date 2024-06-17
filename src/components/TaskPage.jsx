@@ -80,7 +80,6 @@ const TaskPage = () => {
       console.log('Audio uploaded to S3:', `${s3BucketUrl}/${audioKey}`);
 
 
-      
       const data = await API.post('postTake2AiData', '/postTake2AiData', { 
         headers: {
           "Content-Type": "application/json" 
@@ -90,10 +89,10 @@ const TaskPage = () => {
           email: candidate.email,
           phone_number: candidate.phone,
           s3_url: `${s3BucketUrl}/${audioKey}` 
-        } 
+        }
       })
       console.log(data)
-
+      console.log('done')
 
 
       navigate('/feedback');
