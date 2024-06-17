@@ -60,44 +60,87 @@ const TaskPage = () => {
     return `${date}_${time}`;
   };
 
-  const handleSubmit = async () => {
-    // Configure Amplify again if needed
-    // Amplify.configure(awsconfig);
+  // const handleSubmit = async () => {
+  //   // Configure Amplify again if needed
+  //   // Amplify.configure(awsconfig);
 
+  //   console.log('Submitting recording...');
+  //   try {
+  //     const email = candidate.email || 'unknown_user';  // Use candidate's email or 'unknown_user' if not available
+  //     const audioKey = `${email}/${getFormattedDateTime()}.mp3`;  // Custom key with email and timestamp
+  //     const s3BucketUrl = 'https://take2ais3bucket17aa7-dev.us-east-1.amazonaws.com';  // Include region in the S3 URL
+  //     // https://audiofilestorage8ea4a-main.s3.us-east-1.amazonaws.com/
+  //     const region = 'us-east-1'; // Replace with your AWS region
+
+  //     await Storage.put(audioKey, recording, {
+  //       contentType: 'audio/mp3',
+  //       region: region
+  //     });
+
+  //     console.log('Audio uploaded to S3:', `${s3BucketUrl}/${audioKey}`);
+
+
+  //     const data = await API.post('postTake2AiData', '/postTake2AiData', { 
+  //       headers: {},
+  //       body: { 
+  //         name: candidate.name,
+  //         email: candidate.email,
+  //         phone_number: candidate.phone,
+  //         s3_url: `${s3BucketUrl}/${audioKey}` 
+  //       }
+  //     })
+  //     console.log(data)
+  //     console.log('done')
+
+
+  //     navigate('/feedback');
+  //   } catch (error) {
+  //     console.error('Error uploading audio:', error);
+  //   }
+  // };
+
+  const handleSubmit = async () => {
     console.log('Submitting recording...');
     try {
-      const email = candidate.email || 'unknown_user';  // Use candidate's email or 'unknown_user' if not available
-      const audioKey = `${email}/${getFormattedDateTime()}.mp3`;  // Custom key with email and timestamp
-      const s3BucketUrl = 'https://take2ais3bucket17aa7-dev.us-east-1.amazonaws.com';  // Include region in the S3 URL
-      // https://audiofilestorage8ea4a-main.s3.us-east-1.amazonaws.com/
-      const region = 'us-east-1'; // Replace with your AWS region
+        const email = candidate.email || 'unknown_user';  // Use candidate's email or 'unknown_user' if not available
+        const audioKey = `public/${email}/${getFormattedDateTime()}.mp3`;  // Custom key with email and timestamp
 
-      await Storage.put(audioKey, recording, {
-        contentType: 'audio/mp3',
-        region: region
-      });
+        // Upload the file with public-read ACL
+        await Storage.put(audioKey, recording, {
+            contentType: 'audio/mp3',
+            level: 'public'  // Ensure the object is publicly accessible
+        });
 
-      console.log('Audio uploaded to S3:', `${s3BucketUrl}/${audioKey}`);
+        // Get the public URL of the uploaded file
+        const s3Url = await Storage.get(audioKey, {
+            level: 'public'
+        });
 
+        console.log('Audio uploaded to S3:', s3Url);
 
-      const data = await API.post('postTake2AiData', '/postTake2AiData', { 
-        headers: {},
-        body: { 
-          name: candidate.name,
-          email: candidate.email,
-          phone_number: candidate.phone,
-          s3_url: `${s3BucketUrl}/${audioKey}` 
-        }
-      })
-      console.log(data)
-      console.log('done')
+        const data = await API.post('postTake2AiData', '/postTake2AiData', { 
+            headers: {},
+            body: { 
+                name: candidate.name,
+                email: candidate.email,
+                phone_number: candidate.phone,
+                s3_url: s3Url
+            }
+        });
+        console.log(data);
+        console.log('done');
 
-
-      navigate('/feedback');
+        navigate('/feedback');
     } catch (error) {
-      console.error('Error uploading audio:', error);
+        console.error('Error uploading audio:', error);
     }
-  };
+};
+
+
+
+
+
+
 
   const handleRerecord = () => {
     setRecording(null);
