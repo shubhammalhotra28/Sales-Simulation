@@ -6,7 +6,7 @@ import awsgi  # Import awsgi module for AWS Lambda integration
 
 # Initialize DynamoDB client
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('userDatabaseDDB')
+table = dynamodb.Table('userDatabaseDDB-dev')
 
 # Base route for API endpoints
 BASE_ROUTE = "/postTake2AiData"
@@ -26,7 +26,9 @@ def postToDB():
 
         # Fetch audio content from S3
         audio_response = requests.get(s3_url)
+        print('audio response = ',audio_response)
         if audio_response.status_code != 200:
+            print('audio done')
             error_message = f"Failed to download audio from S3: {audio_response.status_code} - {audio_response.text}"
             print(error_message)  # Log the error for debugging
             return jsonify({'error': error_message}), 500
@@ -42,6 +44,8 @@ def postToDB():
             'model': 'whisper-1',  # Example model, update according to your needs
         }
         response = requests.post('https://api.openai.com/v1/audio/transcriptions', headers=headers, files=files, data=transcribe_data)
+
+        print('opern_ai response = ',response)
 
         if response.status_code == 200:
             audio_text = response.json().get('text', '')
