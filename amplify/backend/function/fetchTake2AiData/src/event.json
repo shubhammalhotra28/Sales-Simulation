@@ -1,1 +1,18 @@
-{ "test": "event" }
+{
+    "httpMethod": "GET",
+    "queryStringParameters": {
+      "email": "sm9971@g.rit.edu",
+      "name": "Shubham Malhotra"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "path": "/fetchTake2AiData",
+    "requestContext": {
+      "http": {
+        "method": "GET",
+        "path": "/fetchTake2AiData"
+      }
+    }
+  }
+  
