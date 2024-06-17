@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import boto3
+from flask_cors import CORS
 from boto3.dynamodb.conditions import Key
 import requests
 import awsgi  # Import awsgi module for AWS Lambda integration
@@ -12,6 +13,7 @@ table = dynamodb.Table('userDatabaseDDB-dev')
 BASE_ROUTE = "/postTake2AiData"
 
 app = Flask(__name__)
+CORS(app)
 
 # Endpoint to handle POST requests for saving form data
 @app.route(BASE_ROUTE, methods=["POST"])
