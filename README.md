@@ -1,10 +1,11 @@
 # Improvements (TODO):
-hard coded API key can be added within the key vaults
-IAM roles can be enforced
-API's can be further restricted down to use authentication - JWT tokens or IAM role based
-For code - front end could be more better and inline css could be removed while using it globally throughout the project
-API calls for store can be more fast, if broken down further
-
+<ul>
+<li>hard coded API key can be added within the key vaults</li>
+<li>IAM roles can be enforced</li>
+<li>API's can be further restricted down to use authentication - JWT tokens or IAM role based</li>
+<li>For code - front end could be more better and inline css could be removed while using it globally throughout the project</li>
+<li>API calls for store can be more fast, if broken down further</li>
+</ul>
 ### All these things mentioned above were bypassed because small scale fo project, and can be done if need to add within production
 
 
