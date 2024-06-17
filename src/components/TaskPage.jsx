@@ -83,10 +83,8 @@ const TaskPage = () => {
       
       const data = await API.post('postTake2AiData', '/postTake2AiData', { 
         headers: {
-          "Access-Control-Allow-Headers" : "Content-Type",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "*"
-      },
+          "Content-Type": "application/json" 
+        },
         body: { 
           name: candidate.name,
           email: candidate.email,

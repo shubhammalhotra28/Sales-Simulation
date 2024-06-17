@@ -19,6 +19,11 @@ def postToDB():
     try:
         # Extract data from request
         data = request.json
+
+        if data == None:
+            print("data is None")
+            return jsonify({'error':'Data is having an issue'}), 400
+
         name = data['name']
         email = data['email']
         phone_number = data['phone_number']
