@@ -79,8 +79,14 @@ const TaskPage = () => {
 
       console.log('Audio uploaded to S3:', `${s3BucketUrl}/${audioKey}`);
 
+
+      
       const data = await API.post('postTake2AiData', '/postTake2AiData', { 
-        headers:{},
+        headers: {
+          "Access-Control-Allow-Headers" : "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*"
+      },
         body: { 
           name: candidate.name,
           email: candidate.email,
