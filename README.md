@@ -1,3 +1,18 @@
+# Improvements (TODO):
+hard coded API key can be added within the key vaults
+IAM roles can be enforced
+API's can be further restricted down to use authentication - JWT tokens or IAM role based
+For code - front end could be more better and inline css could be removed while using it globally throughout the project
+API calls for store can be more fast, if broken down further
+
+### All these things mentioned above were bypassed because small scale fo project, and can be done if need to add within production
+
+
+### Also, added small demonstration of how this works which could be referrred below:
+![Short diagram representation](./images/example.png)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
