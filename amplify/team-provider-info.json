@@ -1,0 +1,38 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-take2ai-dev-17aa7-authRole",
+      "UnauthRoleArn": "arn:aws:iam::088657720649:role/amplify-take2ai-dev-17aa7-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::088657720649:role/amplify-take2ai-dev-17aa7-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-take2ai-dev-17aa7-deployment",
+      "UnauthRoleName": "amplify-take2ai-dev-17aa7-unauthRole",
+      "StackName": "amplify-take2ai-dev-17aa7",
+      "StackId": "arn:aws:cloudformation:us-east-1:088657720649:stack/amplify-take2ai-dev-17aa7/fa3c0710-2cb7-11ef-8ab6-126a38c82913",
+      "AmplifyAppId": "d1ae3e93me3wdl"
+    },
+    "categories": {
+      "auth": {
+        "take2aiebc45238": {}
+      },
+      "storage": {
+        "userDatabaseDDB": {},
+        "take2ais3bucket": {}
+      },
+      "function": {
+        "postTake2AiData": {
+          "deploymentBucketName": "amplify-take2ai-dev-17aa7-deployment",
+          "s3Key": "amplify-builds/postTake2AiData-71584932346d42786b58-build.zip"
+        },
+        "fetchTake2AiData": {
+          "deploymentBucketName": "amplify-take2ai-dev-17aa7-deployment",
+          "s3Key": "amplify-builds/fetchTake2AiData-6d526c2f426e7a675841-build.zip"
+        }
+      },
+      "api": {
+        "postTake2AiData": {},
+        "fetchTake2AiData": {}
+      }
+    }
+  }
+}

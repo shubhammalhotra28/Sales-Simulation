@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/postTake2AiData": {
+      "name": "/postTake2AiData",
+      "lambdaFunction": "postTake2AiData",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

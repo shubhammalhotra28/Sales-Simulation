@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/fetchTake2AiData": {
+      "name": "/fetchTake2AiData",
+      "lambdaFunction": "fetchTake2AiData",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
