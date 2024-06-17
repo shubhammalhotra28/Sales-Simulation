@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Storage, Amplify } from 'aws-amplify';
 import MicRecorder from 'mic-recorder-to-mp3';
+import { API } from 'aws-amplify'
 // import awsconfig from '../aws-exports'; // Import your Amplify configuration
 
 const TaskPage = () => {
@@ -77,6 +78,19 @@ const TaskPage = () => {
       });
 
       console.log('Audio uploaded to S3:', `${s3BucketUrl}/${audioKey}`);
+
+      const data = await API.post('postTake2AiData', '/postTake2AiData', { 
+        body: { 
+          name: candidate.name,
+          email: candidate.email,
+          phone_number: candidate.phone,
+          s3_url: `${s3BucketUrl}/${audioKey}` 
+        } 
+      })
+      console.log(data)
+
+
+
       navigate('/feedback');
     } catch (error) {
       console.error('Error uploading audio:', error);
