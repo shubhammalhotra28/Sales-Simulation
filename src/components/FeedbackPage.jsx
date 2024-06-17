@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { API } from 'aws-amplify';
 
 const FeedbackPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const candidate = location.state?.candidate || {};
   const [score, setScore] = useState(null);
   const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
-    // Fetch score and feedback from backend API (simulated for demonstration)
     const fetchFeedback = async () => {
-      // Simulated response
-      const simulatedScore = 8.5;
-      const simulatedFeedback = "Good grammar and clear communication. Work on emphasizing benefits more.";
-
-      setScore(simulatedScore);
-      setFeedback(simulatedFeedback);
+      try {
+        const response = await API.get('fetchTake2AiData', '/fetchTake2AiData', {
+          queryStringParameters: {
+            email: candidate.email,
+            name: candidate.name,
+          }
+        });
+        setScore(response.latest_score);
+        setFeedback(response.latest_feedback);
+      } catch (error) {
+        console.error('Error fetching feedback:', error);
+      }
     };
 
     fetchFeedback();
-  }, []);
+  }, [candidate.email, candidate.name]);
 
   return (
     <div style={styles.container}>
