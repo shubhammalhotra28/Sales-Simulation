@@ -10,7 +10,7 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('userDatabaseDDB-dev')
 
 # Base route for API endpoints
-BASE_ROUTE = "/userUpdateInfo"
+BASE_ROUTE = "/updateUserInfo"
 
 app = Flask(__name__)
 CORS(app)
