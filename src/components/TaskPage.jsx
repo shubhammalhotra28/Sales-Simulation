@@ -200,7 +200,7 @@ const TaskPage = () => {
   };
 
   return (
-    <div className="body-container">
+    <div className="background-container">
       <div className="container">
         <h1 className="heading">Sales Simulation Task</h1>
         <div className="userInfo">

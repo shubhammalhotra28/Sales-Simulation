@@ -58,7 +58,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="body-container">
+    <div className="background-container">
       <div className="container">
         <h1 className="heading"> Sales Simulation</h1>
         <form onSubmit={handleSubmit} className="form">

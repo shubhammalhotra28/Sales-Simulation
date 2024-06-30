@@ -55,7 +55,7 @@ const FeedbackPage = () => {
   };
 
   return (
-    <div className="body-container">
+    <div className="background-container">
       <div className="feedback-container">
         <h1 className="feedback-heading">Task Feedback</h1>
         {score !== null && <p className="feedback-score">Score: {score}/10</p>}
