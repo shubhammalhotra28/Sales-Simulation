@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../assets/index.css'
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -57,79 +58,28 @@ const LandingPage = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Healthcare Sales Simulation</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.formGroup}>
-          <label htmlFor="name" style={styles.label}>Name:</label>
-          <input type="text" id="name" name="name" value={candidate.name} onChange={handleChange} style={styles.input} />
-          {errors.name && <p style={styles.error}>{errors.name}</p>}
+    <div className="container">
+      <h1 className="heading">Healthcare Sales Simulation</h1>
+      <form onSubmit={handleSubmit} className="form">
+        <div className="formGroup">
+          <label htmlFor="name" className="label">Name:</label>
+          <input type="text" id="name" name="name" value={candidate.name} onChange={handleChange} className="input" />
+          {errors.name && <p className="error">{errors.name}</p>}
         </div>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>Email:</label>
-          <input type="email" id="email" name="email" value={candidate.email} onChange={handleChange} style={styles.input} />
-          {errors.email && <p style={styles.error}>{errors.email}</p>}
+        <div className="formGroup">
+          <label htmlFor="email" className="label">Email:</label>
+          <input type="email" id="email" name="email" value={candidate.email} onChange={handleChange} className="input" />
+          {errors.email && <p className="error">{errors.email}</p>}
         </div>
-        <div style={styles.formGroup}>
-          <label htmlFor="phone" style={styles.label}>Phone:</label>
-          <input type="tel" id="phone" name="phone" value={candidate.phone} onChange={handleChange} style={styles.input} />
-          {errors.phone && <p style={styles.error}>{errors.phone}</p>}
+        <div className="formGroup">
+          <label htmlFor="phone" className="label">Phone:</label>
+          <input type="tel" id="phone" name="phone" value={candidate.phone} onChange={handleChange} className="input" />
+          {errors.phone && <p className="error">{errors.phone}</p>}
         </div>
-        <button type="submit" style={styles.button}>Start Simulation</button>
+        <button type="submit" className="button">Start Simulation</button>
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: 'auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#f0f0f0',
-    borderRadius: '8px',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: '28px',
-    color: '#333',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  formGroup: {
-    marginBottom: '15px',
-  },
-  label: {
-    marginBottom: '5px',
-    fontSize: '16px',
-    color: '#555',
-  },
-  input: {
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    width: '100%',
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    alignSelf: 'center',
-    marginTop: '10px',
-  },
-  error: {
-    color: 'red',
-    fontSize: '14px',
-  }
 };
 
 export default LandingPage;

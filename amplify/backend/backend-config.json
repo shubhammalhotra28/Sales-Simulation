@@ -27,6 +27,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "updateUserInfo": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userUpdateInfo"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -65,6 +79,11 @@
       "service": "Lambda"
     },
     "postTake2AiData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userUpdateInfo": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

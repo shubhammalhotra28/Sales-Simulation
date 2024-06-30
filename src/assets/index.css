@@ -1,0 +1,114 @@
+/* index.css */
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .prompt {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .button, .editButton, .saveButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .submitButton {
+    background-color: #28a745;
+  }
+  
+  .disabledButton {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .activeButton {
+    background-color: #dc3545;
+  }
+  
+  .loaderContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .userInfo {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 60px;
+  }
+  
+  .userData {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  

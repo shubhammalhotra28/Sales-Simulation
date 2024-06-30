@@ -1,6 +1,5 @@
-// Dashboard.jsx
-
 import React from 'react';
+import '../assets/index.css'
 
 function Dashboard() {
   return (

@@ -1,0 +1,33 @@
+{
+    "resource": "/{proxy+}",
+    "path": "/postTake2AiData",
+    "httpMethod": "POST",
+    "headers": {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "Host": "your-api-id.execute-api.your-region.amazonaws.com",
+        "User-Agent": "..."
+    },
+    "queryStringParameters": null,
+    "pathParameters": null,
+    "requestContext": {
+        "accountId": "...",
+        "apiId": "your-api-id",
+        "httpMethod": "POST",
+        "identity": {
+            "accountId": null,
+            "apiKey": null,
+            "caller": null,
+            "cognitoAuthenticationProvider": null,
+            "cognitoAuthenticationType": null,
+            "cognitoIdentityId": null,
+            "cognitoIdentityPoolId": null,
+            "sourceIp": "..."
+        },
+        "resourceId": "...",
+        "resourcePath": "/{proxy+}",
+        "stage": "prod"
+    },
+    "body": "{\"name\":\"Shubham\",\"email\":\"sm9971@g.rit.edu\",\"phone_number\":\"5859574486\",\"s3_url\":\"https://take2ais3bucket17aa7-dev.s3.amazonaws.com/public/sm9971%40g.rit.edu/2024-06-17_12-12-05.mp3\"}",
+    "isBase64Encoded": false
+}

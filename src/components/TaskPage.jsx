@@ -4,6 +4,7 @@ import { Storage } from 'aws-amplify';
 import MicRecorder from 'mic-recorder-to-mp3';
 import { API } from 'aws-amplify';
 import { TailSpin } from 'react-loader-spinner';
+import '../assets/index.css';
 
 const TaskPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,17 @@ const TaskPage = () => {
   const [isBlocked, setIsBlocked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [recorder, setRecorder] = useState(null);
+  const [userDetails, setUserDetails] = useState(candidate);
+  const [isEditing, setIsEditing] = useState({
+    name: false,
+    email: false,
+    phone: false,
+  });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
 
   useEffect(() => {
     navigator.getUserMedia(
@@ -33,6 +45,23 @@ const TaskPage = () => {
     const newRecorder = new MicRecorder({ bitRate: 128 });
     setRecorder(newRecorder);
   }, []);
+
+  useEffect(() => {
+    // Save user details when component is loaded
+    const saveUserDetailsOnLoad = async () => {
+      try {
+        const data = await API.put('updateUserDetails', '/updateUserDetails', {
+          headers: {},
+          body: userDetails,
+        });
+        console.log('User details saved on load:', data);
+      } catch (error) {
+        console.error('Error saving user details on load:', error);
+      }
+    };
+
+    saveUserDetailsOnLoad();
+  }, [userDetails]);
 
   const handleStartRecording = () => {
     if (isBlocked) {
@@ -65,7 +94,7 @@ const TaskPage = () => {
     console.log('Submitting recording...');
     setIsLoading(true);
     try {
-      const email = candidate.email || 'unknown_user';  // Use candidate's email or 'unknown_user' if not available
+      const email = userDetails.email || 'unknown_user';  // Use userDetails' email or 'unknown_user' if not available
       const audioKey = `public/${email}/${getFormattedDateTime()}.mp3`;  // Custom key with email and timestamp
 
       // Upload the file with public-read ACL
@@ -81,20 +110,23 @@ const TaskPage = () => {
 
       console.log('Audio uploaded to S3:', s3Url);
 
-      const data = await API.post('postTake2AiData', '/postTake2AiData', { 
+      const data = await API.post('postTake2AiData', '/postTake2AiData', {
         headers: {},
-        body: { 
-          name: candidate.name,
-          email: candidate.email,
-          phone_number: candidate.phone,
-          s3_url: s3Url
-        }
+        body: {
+          name: userDetails.name,
+          email: userDetails.email,
+          phone_number: userDetails.phone,
+          s3_url: s3Url,
+        },
       });
       console.log(data);
-      console.log('done');
 
+      // Update user details
+      await handleSaveDetails();
+
+      console.log('done');
       setIsLoading(false);
-      navigate('/feedback', { state: { candidate } });  // Pass candidate data to FeedbackPage
+      navigate('/feedback', { state: { candidate: userDetails } });  // Pass updated userDetails data to FeedbackPage
     } catch (error) {
       console.error('Error uploading audio:', error);
       setIsLoading(false);
@@ -106,96 +138,165 @@ const TaskPage = () => {
     setIsRecording(false);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      email: '',
+      phone: '',
+    };
+    let isValid = true;
+
+    // Name validation (no special characters)
+    if (!/^[a-zA-Z\s]+$/.test(userDetails.name)) {
+      newErrors.name = 'Name must contain only letters and spaces.';
+      isValid = false;
+    }
+
+    // Email validation (basic format check)
+    if (!/\S+@\S+\.\S+/.test(userDetails.email)) {
+      newErrors.email = 'Email is invalid.';
+      isValid = false;
+    }
+
+    // Phone validation (must be numeric)
+    if (!/^\d+$/.test(userDetails.phone)) {
+      newErrors.phone = 'Phone number must contain only digits.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSaveDetails = async () => {
+    if (!validateForm()) return;
+    try {
+      const data = await API.put('updateUserDetails', '/updateUserDetails', {
+        headers: {},
+        body: userDetails,
+      });
+      console.log('User details updated:', data);
+    } catch (error) {
+      console.error('Error updating user details:', error);
+    }
+  };
+
+  const toggleEdit = (field) => {
+    setIsEditing((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  const handleSaveField = (field) => {
+    if (validateForm()) {
+      handleSaveDetails();
+      toggleEdit(field);
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Sales Simulation Task</h1>
-      <p style={styles.prompt}>Record an audio selling a healthcare service:</p>
-      <div style={styles.buttonGroup}>
-        <button style={styles.button} onClick={handleStartRecording} disabled={isRecording || isBlocked}>
+    <div className="container">
+      <h1 className="heading">Sales Simulation Task</h1>
+      <div className="userInfo">
+        <div className="formGroup">
+          <label className="label">Name:</label>
+          {isEditing.name ? (
+            <input
+              type="text"
+              name="name"
+              value={userDetails.name}
+              onChange={handleInputChange}
+              className="input"
+            />
+          ) : (
+            <span className="userData">{userDetails.name}</span>
+          )}
+          {errors.name && <p className="error">{errors.name}</p>}
+          <div className="buttonContainer">
+            <button className="editButton" onClick={() => toggleEdit('name')}>
+              {isEditing.name ? 'Cancel' : 'Edit'}
+            </button>
+            {isEditing.name && (
+              <button className="saveButton" onClick={() => handleSaveField('name')}>
+                Save
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="formGroup">
+          <label className="label">Email:</label>
+          {isEditing.email ? (
+            <input
+              type="email"
+              name="email"
+              value={userDetails.email}
+              onChange={handleInputChange}
+              className="input"
+            />
+          ) : (
+            <span className="userData">{userDetails.email}</span>
+          )}
+          {errors.email && <p className="error">{errors.email}</p>}
+          <div className="buttonContainer">
+            <button className="editButton" onClick={() => toggleEdit('email')}>
+              {isEditing.email ? 'Cancel' : 'Edit'}
+            </button>
+            {isEditing.email && (
+              <button className="saveButton" onClick={() => handleSaveField('email')}>
+                Save
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="formGroup">
+          <label className="label">Phone:</label>
+          {isEditing.phone ? (
+            <input
+              type="tel"
+              name="phone"
+              value={userDetails.phone}
+              onChange={handleInputChange}
+              className="input"
+            />
+          ) : (
+            <span className="userData">{userDetails.phone}</span>
+          )}
+          {errors.phone && <p className="error">{errors.phone}</p>}
+          <div className="buttonContainer">
+            <button className="editButton" onClick={() => toggleEdit('phone')}>
+              {isEditing.phone ? 'Cancel' : 'Edit'}
+            </button>
+            {isEditing.phone && (
+              <button className="saveButton" onClick={() => handleSaveField('phone')}>
+                Save
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+      <p className="prompt">Record an audio selling a healthcare service:</p>
+      <div className="buttonGroup">
+        <button className="button" onClick={handleStartRecording} disabled={isRecording || isBlocked}>
           {isRecording ? 'Recording...' : 'Start Recording'}
         </button>
-        <button style={styles.button} onClick={handleStopRecording} disabled={!isRecording}>
+        <button className="button" onClick={handleStopRecording} disabled={!isRecording}>
           Stop Recording
         </button>
-        <button style={{ ...styles.button, ...(!recording ? styles.disabledButton : styles.activeButton) }} onClick={handleRerecord} disabled={!recording}>
+        <button className={`button ${!recording ? 'disabledButton' : 'activeButton'}`} onClick={handleRerecord} disabled={!recording}>
           Re-record
         </button>
-        <button style={styles.submitButton} onClick={handleSubmit} disabled={!recording || isLoading}>
+        <button className="submitButton" onClick={handleSubmit} disabled={!recording || isLoading}>
           Submit
         </button>
       </div>
-      {isLoading && <div style={styles.loaderContainer}><TailSpin color="#00BFFF" height={80} width={80} /></div>}
+      {isLoading && <div className="loaderContainer"><TailSpin color="#00BFFF" height={80} width={80} /></div>}
       <br />
-      <Link to="/" style={styles.link}>Cancel and Return to Landing Page</Link>
+      <Link to="/" className="link">Cancel and Return to Landing Page</Link>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: 'auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#f0f0f0',
-    borderRadius: '8px',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: '28px',
-    color: '#333',
-  },
-  prompt: {
-    fontSize: '18px',
-    color: '#555',
-    marginBottom: '20px',
-  },
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '20px',
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    margin: '0 10px',
-    cursor: 'pointer',
-  },
-  submitButton: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    backgroundColor: '#28a745',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    margin: '0 10px',
-    cursor: 'pointer',
-  },
-  disabledButton: {
-    backgroundColor: '#ccc',
-    cursor: 'not-allowed',
-    opacity: '0.6',
-  },
-  activeButton: {
-    backgroundColor: '#dc3545',
-  },
-  loaderContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: '20px',
-  },
-  link: {
-    display: 'block',
-    textAlign: 'center',
-    marginTop: '20px',
-    color: '#007bff',
-    textDecoration: 'none',
-  },
 };
 
 export default TaskPage;
