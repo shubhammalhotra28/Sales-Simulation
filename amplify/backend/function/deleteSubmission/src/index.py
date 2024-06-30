@@ -44,7 +44,7 @@ def deleteSubmission():
         submissions = item.get('submissions', [])
 
         # Find and remove the submission with the matching feedback
-        updated_submissions = [sub for sub in submissions if sub.get('M', {}).get('feedback', {}).get('S') != feedback]
+        updated_submissions = [sub for sub in submissions if sub.get('feedback') != feedback]
 
         if len(updated_submissions) == len(submissions):
             return jsonify({"error": "Submission with the specified feedback not found"}), 404
@@ -60,8 +60,6 @@ def deleteSubmission():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
 
 def handler(event,context):
     
