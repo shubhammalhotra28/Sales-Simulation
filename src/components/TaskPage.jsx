@@ -54,7 +54,7 @@ const TaskPage = () => {
 
   const saveUserDetailsOnLoad = async () => {
     try {
-      const data = await API.post('userUpdateInfo', '/userUpdateInfo', {
+      const data = await API.post('updateUserInfo', '/updateUserInfo', {
         headers: {},
         body: { newUserDetails: candidate },
       });
@@ -177,7 +177,7 @@ const TaskPage = () => {
   const handleSaveDetails = async () => {
     if (!validateForm()) return;
     try {
-      const data = await API.put('userUpdateInfo', '/userUpdateInfo', {
+      const data = await API.put('updateUserInfo', '/updateUserInfo', {
         headers: {},
         body: { oldUserDetails, newUserDetails: userDetails },
       });
