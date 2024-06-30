@@ -22,17 +22,6 @@ def postToDB():
         # Extract data from request
         request_json = request.get_json()
 
-        # data = request.json
-
-        # if data == None:
-        #     print("data is None")
-        #     return jsonify({'error':'Data is having an issue'}), 400
-
-        # email = str(args.get("email"))
-        # name = str(args.get("name"))
-        # phone_number = str(args.get("phone_number"))
-        # s3_url = str(args.get("s3_url"))
-
         name = request_json.get("name")
         phone_number = request_json.get("phone_number")
         s3_url = request_json.get("s3_url")

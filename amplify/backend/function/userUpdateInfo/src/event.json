@@ -1,6 +1,6 @@
 {
     "resource": "/{proxy+}",
-    "path": "/postTake2AiData",
+    "path": "/userUpdateInfo",
     "httpMethod": "POST",
     "headers": {
         "Accept": "*/*",

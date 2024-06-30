@@ -26,6 +26,8 @@ const TaskPage = () => {
     email: '',
     phone: '',
   });
+  const [updateResponse, setUpdateResponse] = useState('');
+  const [oldUserDetails, setOldUserDetails] = useState({ ...candidate });
 
   useEffect(() => {
     navigator.getUserMedia(
@@ -47,21 +49,20 @@ const TaskPage = () => {
   }, []);
 
   useEffect(() => {
-    // Save user details when component is loaded
-    const saveUserDetailsOnLoad = async () => {
-      try {
-        const data = await API.put('updateUserDetails', '/updateUserDetails', {
-          headers: {},
-          body: userDetails,
-        });
-        console.log('User details saved on load:', data);
-      } catch (error) {
-        console.error('Error saving user details on load:', error);
-      }
-    };
-
     saveUserDetailsOnLoad();
-  }, [userDetails]);
+  }, []);
+
+  const saveUserDetailsOnLoad = async () => {
+    try {
+      const data = await API.post('userUpdateInfo', '/userUpdateInfo', {
+        headers: {},
+        body: { newUserDetails: candidate },
+      });
+      console.log('User details saved on load:', data);
+    } catch (error) {
+      console.error('Error saving user details on load:', error);
+    }
+  };
 
   const handleStartRecording = () => {
     if (isBlocked) {
@@ -176,12 +177,14 @@ const TaskPage = () => {
   const handleSaveDetails = async () => {
     if (!validateForm()) return;
     try {
-      const data = await API.put('updateUserDetails', '/updateUserDetails', {
+      const data = await API.put('userUpdateInfo', '/userUpdateInfo', {
         headers: {},
-        body: userDetails,
+        body: { oldUserDetails, newUserDetails: userDetails },
       });
+      setUpdateResponse('User details updated successfully');
       console.log('User details updated:', data);
     } catch (error) {
+      setUpdateResponse('Error updating user details');
       console.error('Error updating user details:', error);
     }
   };
@@ -194,6 +197,7 @@ const TaskPage = () => {
     if (validateForm()) {
       handleSaveDetails();
       toggleEdit(field);
+      setOldUserDetails({ ...userDetails });
     }
   };
 
@@ -276,8 +280,9 @@ const TaskPage = () => {
             )}
           </div>
         </div>
+        {updateResponse && <p className="updateResponse">{updateResponse}</p>}
       </div>
-      <p className="heading">Record an audio selling a healthcare service:</p>
+      <p className="prompt">Record an audio selling a healthcare service:</p>
       <div className="buttonGroup">
         <button className="button" onClick={handleStartRecording} disabled={isRecording || isBlocked}>
           {isRecording ? 'Recording...' : 'Start Recording'}
