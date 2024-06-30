@@ -2,11 +2,43 @@
 
 An online platform allowing user to get the feedback on their sales pitch.
 
- 
+---
+
+# Application UI
+
+Here's a preview of how the application looks:
+
+## Landing Page
+![Landing Page](./public/figma/landing.png)
+
+## Task Page
+![Task Page](./public/figma/task.png)
+
+## Recording bar
+![Recording bar](./public/figma/recorder.png)
+
+## Rendering bar
+![Rendering bar Page](./public/figma/rendering.png)
+
+## Feedback Page
+![Feedback Page](./public/figma/feedback.png)
+
+## Deleting Recording Feedback
+![FeedDeleting Recording Feedbackback Page](./public/figma/deleted.png)
+
+
+---
+
+### Also, added a small demonstration of how this works which could be referred to below:
+![Short diagram representation](./images/example.png)
+
+---
+
 ## Prerequisites
 - IAM role with permissions (Amplify full access, dynamo db access, s3 access)
 - Use an ubuntu t2.2xlarge config EC2 instance
 - Administrator access for the Repo, which will be used later for adding the hosting
+---
 
 ## How to deploy it  (Follow the commands as mentioned below)
 - ```sudo apt update```
@@ -38,6 +70,7 @@ An online platform allowing user to get the feedback on their sales pitch.
 - Do ```amplify init```
   - Enter your ```access key id``` and Secret ```access key``` when prompted, whcih should be created with IAM Role creation as a prereq (with policies as AWS Amplify full access). Once role is created you should have the csv file with the credentials, use that to set up the cli.
 - Do ```amplify push```  (This should deploy all the required resources)
+---
 
 ### This will deploy all the backend environment for the project
 
@@ -94,6 +127,7 @@ frontend:
 - Once done, then the build should be in queue and the entire application should be build and hosted end to end.
 - Clicking on the link of the application, should help to take you to the hosted application.
 
+---
 
 ## Known bugs and disclaimers
 
@@ -105,7 +139,6 @@ frontend:
 - Search for all the lambdas which are created through the amplify command. As amplify automates the process, the roles created for the lambda execution are appended by some number so need to be searched in specific folders to get the exact name and attach the policies.
 - Search for LambdaExecutionRole name within the codebase.
 - Attach the required policies to that specific lambda role.
-- Similarly, we have to go to all the functions which comes with the project setup ie populateuser, textract, translate, images, comprehend
 - Policies to be attached are as follow:
 ```
 AmazonDynamoDBFullAccess
@@ -119,6 +152,7 @@ AmazonS3FullAccess
 - Push to the backend environemnt by doing amplify push or you can commit to the master (assuming master of the repo is connected), it should build all the resources again and update whatever is new or edited.
 - This will ensure that entire application works end to end now.
 
+---
 
 ## How to test/run/access/use it
 1. Click on the link, which should be available on the AWS amplify if wanted to work/test the hosted application functionality.
@@ -127,6 +161,7 @@ AmazonS3FullAccess
 4. Once npm install finishes, it should fetch all the required dependencies.
 5. Do ```npm start```, it will launch the application on the browswer.
 
+---
 
 # Improvements (TODO):
 <ul>
@@ -136,37 +171,13 @@ AmazonS3FullAccess
 <li>Some API calls for store can be more fast, if broken down further - Forx : Open AI integration</li>
 </ul>
 
+---
+
 ### All these things mentioned above were bypassed because of the small scale of the project, and can be done if needed to add within production.
 
-### Also, added a small demonstration of how this works which could be referred to below:
-![Short diagram representation](./images/example.png)
-
 ---
 
-# Application UI
 
-Here's a preview of how the application looks:
-
-## Landing Page
-![Landing Page](./public/figma/landing.png)
-
-## Task Page
-![Task Page](./public/figma/task.png)
-
-## Recording bar
-![Recording bar](./public/figma/recorder.png)
-
-## Rendering bar
-![Rendering bar Page](./public/figma/rendering.png)
-
-## Feedback Page
-![Feedback Page](./public/figma/feedback.png)
-
-## Deleting Recording Feedback
-![FeedDeleting Recording Feedbackback Page](./public/figma/deleted.png)
-
-
----
 
 # Getting Started with Create React App
 
