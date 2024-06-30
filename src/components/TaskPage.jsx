@@ -277,7 +277,7 @@ const TaskPage = () => {
           </div>
         </div>
       </div>
-      <h1 className="heading">Sales Simulation Task</h1>
+      <p className="heading">Record an audio selling a healthcare service:</p>
       <div className="buttonGroup">
         <button className="button" onClick={handleStartRecording} disabled={isRecording || isBlocked}>
           {isRecording ? 'Recording...' : 'Start Recording'}
