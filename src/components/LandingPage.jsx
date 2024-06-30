@@ -60,7 +60,7 @@ const LandingPage = () => {
   return (
     <div className="body-container">
       <div className="container">
-        <h1 className="heading">Healthcare Sales Simulation</h1>
+        <h1 className="heading"> Sales Simulation</h1>
         <form onSubmit={handleSubmit} className="form">
           <div className="formGroup">
             <label htmlFor="name" className="label">Name:</label>
