@@ -109,7 +109,11 @@ const TaskPage = () => {
         level: 'public'
       });
 
-      console.log('Audio uploaded to S3:', s3Url);
+      
+      
+      // Update user details
+      // await handleSaveDetails();
+
 
       const data = await API.post('postTake2AiData', '/postTake2AiData', {
         headers: {},
@@ -122,8 +126,6 @@ const TaskPage = () => {
       });
       console.log(data);
 
-      // Update user details
-      await handleSaveDetails();
 
       console.log('done');
       setIsLoading(false);
