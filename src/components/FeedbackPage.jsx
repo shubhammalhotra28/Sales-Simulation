@@ -41,7 +41,7 @@ const FeedbackPage = () => {
         body: {
           email: candidate.email,
           name: candidate.name,
-          phone_number: candidate.phone_number,
+          phone_number: candidate.phone,
           feedback: feedback
         }
       });
@@ -55,21 +55,23 @@ const FeedbackPage = () => {
   };
 
   return (
-    <div className="feedback-container">
-      <h1 className="feedback-heading">Task Feedback</h1>
-      {score !== null && <p className="feedback-score">Score: {score}/10</p>}
-      <p className="feedback-title">Feedback:</p>
-      <p className="feedback-content">{feedback}</p>
-      <br />
-      <button
-        className="feedback-delete-button"
-        onClick={handleDelete}
-        disabled={isDeleting || feedback === ''}
-      >
-        {isDeleting ? 'Deleting...' : 'Delete Submission'}
-      </button>
-      <br />
-      <Link to="/" className="feedback-link">Return to Landing Page</Link>
+    <div className="body-container">
+      <div className="feedback-container">
+        <h1 className="feedback-heading">Task Feedback</h1>
+        {score !== null && <p className="feedback-score">Score: {score}/10</p>}
+        <p className="feedback-title">Feedback:</p>
+        <p className="feedback-content">{feedback}</p>
+        <br />
+        <button
+          className="feedback-delete-button"
+          onClick={handleDelete}
+          disabled={isDeleting || feedback === ''}
+        >
+          {isDeleting ? 'Deleting...' : 'Delete Submission'}
+        </button>
+        <br />
+        <Link to="/" className="feedback-link">Return to Landing Page</Link>
+      </div>
     </div>
   );
 };

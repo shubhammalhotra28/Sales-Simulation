@@ -200,104 +200,106 @@ const TaskPage = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="heading">Sales Simulation Task</h1>
-      <div className="userInfo">
-        <div className="formGroup">
-          <label className="label">Name:</label>
-          {isEditing.name ? (
-            <input
-              type="text"
-              name="name"
-              value={userDetails.name}
-              onChange={handleInputChange}
-              className="input"
-            />
-          ) : (
-            <span className="userData">{userDetails.name}</span>
-          )}
-          {errors.name && <p className="error">{errors.name}</p>}
-          <div className="buttonContainer">
-            <button className="editButton" onClick={() => toggleEdit('name')}>
-              {isEditing.name ? 'Cancel' : 'Edit'}
-            </button>
-            {isEditing.name && (
-              <button className="saveButton" onClick={() => handleSaveField('name')}>
-                Save
-              </button>
+    <div className="body-container">
+      <div className="container">
+        <h1 className="heading">Sales Simulation Task</h1>
+        <div className="userInfo">
+          <div className="formGroup">
+            <label className="label">Name:</label>
+            {isEditing.name ? (
+              <input
+                type="text"
+                name="name"
+                value={userDetails.name}
+                onChange={handleInputChange}
+                className="input"
+              />
+            ) : (
+              <span className="userData">{userDetails.name}</span>
             )}
-          </div>
-        </div>
-        <div className="formGroup">
-          <label className="label">Email:</label>
-          {isEditing.email ? (
-            <input
-              type="email"
-              name="email"
-              value={userDetails.email}
-              onChange={handleInputChange}
-              className="input"
-            />
-          ) : (
-            <span className="userData">{userDetails.email}</span>
-          )}
-          {errors.email && <p className="error">{errors.email}</p>}
-          <div className="buttonContainer">
-            <button className="editButton" onClick={() => toggleEdit('email')}>
-              {isEditing.email ? 'Cancel' : 'Edit'}
-            </button>
-            {isEditing.email && (
-              <button className="saveButton" onClick={() => handleSaveField('email')}>
-                Save
+            {errors.name && <p className="error">{errors.name}</p>}
+            <div className="buttonContainer">
+              <button className="editButton" onClick={() => toggleEdit('name')}>
+                {isEditing.name ? 'Cancel' : 'Edit'}
               </button>
-            )}
+              {isEditing.name && (
+                <button className="saveButton" onClick={() => handleSaveField('name')}>
+                  Save
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="formGroup">
-          <label className="label">Phone:</label>
-          {isEditing.phone ? (
-            <input
-              type="tel"
-              name="phone"
-              value={userDetails.phone}
-              onChange={handleInputChange}
-              className="input"
-            />
-          ) : (
-            <span className="userData">{userDetails.phone}</span>
-          )}
-          {errors.phone && <p className="error">{errors.phone}</p>}
-          <div className="buttonContainer">
-            <button className="editButton" onClick={() => toggleEdit('phone')}>
-              {isEditing.phone ? 'Cancel' : 'Edit'}
-            </button>
-            {isEditing.phone && (
-              <button className="saveButton" onClick={() => handleSaveField('phone')}>
-                Save
+          <div className="formGroup">
+            <label className="label">Email:</label>
+            {isEditing.email ? (
+              <input
+                type="email"
+                name="email"
+                value={userDetails.email}
+                onChange={handleInputChange}
+                className="input"
+              />
+            ) : (
+              <span className="userData">{userDetails.email}</span>
+            )}
+            {errors.email && <p className="error">{errors.email}</p>}
+            <div className="buttonContainer">
+              <button className="editButton" onClick={() => toggleEdit('email')}>
+                {isEditing.email ? 'Cancel' : 'Edit'}
               </button>
-            )}
+              {isEditing.email && (
+                <button className="saveButton" onClick={() => handleSaveField('email')}>
+                  Save
+                </button>
+              )}
+            </div>
           </div>
+          <div className="formGroup">
+            <label className="label">Phone:</label>
+            {isEditing.phone ? (
+              <input
+                type="tel"
+                name="phone"
+                value={userDetails.phone}
+                onChange={handleInputChange}
+                className="input"
+              />
+            ) : (
+              <span className="userData">{userDetails.phone}</span>
+            )}
+            {errors.phone && <p className="error">{errors.phone}</p>}
+            <div className="buttonContainer">
+              <button className="editButton" onClick={() => toggleEdit('phone')}>
+                {isEditing.phone ? 'Cancel' : 'Edit'}
+              </button>
+              {isEditing.phone && (
+                <button className="saveButton" onClick={() => handleSaveField('phone')}>
+                  Save
+                </button>
+              )}
+            </div>
+          </div>
+          {updateResponse && <p className="updateResponse">{updateResponse}</p>}
         </div>
-        {updateResponse && <p className="updateResponse">{updateResponse}</p>}
+        <p className="prompt">Record an audio selling a healthcare service:</p>
+        <div className="buttonGroup">
+          <button className="button" onClick={handleStartRecording} disabled={isRecording || isBlocked}>
+            {isRecording ? 'Recording...' : 'Start Recording'}
+          </button>
+          <button className="button" onClick={handleStopRecording} disabled={!isRecording}>
+            Stop Recording
+          </button>
+          <button className={`button ${!recording ? 'disabledButton' : 'activeButton'}`} onClick={handleRerecord} disabled={!recording}>
+            Re-record
+          </button>
+          <button className="submitButton" onClick={handleSubmit} disabled={!recording || isLoading}>
+            Submit
+          </button>
+        </div>
+        {isLoading && <div className="loaderContainer"><TailSpin color="#00BFFF" height={80} width={80} /></div>}
+        <br />
+        <Link to="/" className="link">Cancel and Return to Landing Page</Link>
       </div>
-      <p className="prompt">Record an audio selling a healthcare service:</p>
-      <div className="buttonGroup">
-        <button className="button" onClick={handleStartRecording} disabled={isRecording || isBlocked}>
-          {isRecording ? 'Recording...' : 'Start Recording'}
-        </button>
-        <button className="button" onClick={handleStopRecording} disabled={!isRecording}>
-          Stop Recording
-        </button>
-        <button className={`button ${!recording ? 'disabledButton' : 'activeButton'}`} onClick={handleRerecord} disabled={!recording}>
-          Re-record
-        </button>
-        <button className="submitButton" onClick={handleSubmit} disabled={!recording || isLoading}>
-          Submit
-        </button>
-      </div>
-      {isLoading && <div className="loaderContainer"><TailSpin color="#00BFFF" height={80} width={80} /></div>}
-      <br />
-      <Link to="/" className="link">Cancel and Return to Landing Page</Link>
     </div>
   );
 };

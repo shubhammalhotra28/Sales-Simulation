@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/index.css'
+import '../assets/index.css';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -58,26 +58,30 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="heading">Healthcare Sales Simulation</h1>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="formGroup">
-          <label htmlFor="name" className="label">Name:</label>
-          <input type="text" id="name" name="name" value={candidate.name} onChange={handleChange} className="input" />
-          {errors.name && <p className="error">{errors.name}</p>}
-        </div>
-        <div className="formGroup">
-          <label htmlFor="email" className="label">Email:</label>
-          <input type="email" id="email" name="email" value={candidate.email} onChange={handleChange} className="input" />
-          {errors.email && <p className="error">{errors.email}</p>}
-        </div>
-        <div className="formGroup">
-          <label htmlFor="phone" className="label">Phone:</label>
-          <input type="tel" id="phone" name="phone" value={candidate.phone} onChange={handleChange} className="input" />
-          {errors.phone && <p className="error">{errors.phone}</p>}
-        </div>
-        <button type="submit" className="button">Start Simulation</button>
-      </form>
+    <div className="body-container">
+      <div className="container">
+        <h1 className="heading">Healthcare Sales Simulation</h1>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="formGroup">
+            <label htmlFor="name" className="label">Name:</label>
+            <input type="text" id="name" name="name" value={candidate.name} onChange={handleChange} className="input" />
+            {errors.name && <p className="error">{errors.name}</p>}
+          </div>
+          <div className="formGroup">
+            <label htmlFor="email" className="label">Email:</label>
+            <input type="email" id="email" name="email" value={candidate.email} onChange={handleChange} className="input" />
+            {errors.email && <p className="error">{errors.email}</p>}
+          </div>
+          <div className="formGroup">
+            <label htmlFor="phone" className="label">Phone:</label>
+            <input type="tel" id="phone" name="phone" value={candidate.phone} onChange={handleChange} className="input" />
+            {errors.phone && <p className="error">{errors.phone}</p>}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <button type="submit" className="button">Start Simulation</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
