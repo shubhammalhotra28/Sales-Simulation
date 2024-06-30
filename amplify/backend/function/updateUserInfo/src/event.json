@@ -1,7 +1,7 @@
 {
     "resource": "/{proxy+}",
     "path": "/updateUserInfo",
-    "httpMethod": "POST",
+    "httpMethod": "PUT",
     "headers": {
         "Accept": "*/*",
         "Content-Type": "application/json",
@@ -28,6 +28,6 @@
         "resourcePath": "/{proxy+}",
         "stage": "prod"
     },
-    "body": "{\"newUserDetails\":{\"name\":\"John Doe\",\"email\":\"john.doe@example.com\",\"phone\":\"1234567890\"}}",
+    "body": "{\"oldUserDetails\":{\"name\":\"John Doe\",\"email\":\"john.doe@example.com\",\"phone\":\"1234567890\"},\"newUserDetails\":{\"name\":\"Jane Doe\",\"email\":\"jane.doe@example.com\",\"phone\":\"0987654321\"}}",
     "isBase64Encoded": false
 }

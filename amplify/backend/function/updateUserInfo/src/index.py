@@ -52,7 +52,6 @@ def storeUserToDB():
 
 @app.route(BASE_ROUTE, methods=["PUT"])
 def updateUserInfo():
-    
     try:
         request_json = request.json
 
@@ -75,7 +74,7 @@ def updateUserInfo():
 
         if not prev_email or not prev_name or not prev_phone:
             return jsonify({"error": "Missing required fields"}), 400
-        
+
         # Query DynamoDB to retrieve the latest record for the email and name
         response = table.query(
             KeyConditionExpression=Key('email').eq(prev_email) & Key('name').eq(prev_name),
@@ -86,19 +85,34 @@ def updateUserInfo():
 
         # Update or insert into DynamoDB
         if latest_record:
-            # Update the existing record with new user details
-            table.update_item(
-                Key={'email': prev_email, 'name': prev_name},
-                UpdateExpression='SET email = :new_email, name = :new_name, phone = :new_phone',
-                ExpressionAttributeValues={
-                    ':new_email': new_email,
-                    ':new_name': new_name,
-                    ':new_phone': new_phone
+            # Delete the old record
+            # need to delete instead of updating the record and then adding
+            # because email is the primary key within the dynamo db table
+            # so can't be deleted straight away
+            table.delete_item(
+                Key={'email': prev_email, 'name': prev_name}
+            )
+
+            # Insert the new record
+            table.put_item(
+                Item={
+                    'email': new_email,
+                    'name': new_name,
+                    'phone_number': new_phone
                 }
             )
             return jsonify({"message": "User details updated successfully"}), 200
+        else:
+            # Insert the new record
+            table.put_item(
+                Item={
+                    'email': new_email,
+                    'name': new_name,
+                    'phone_number': new_phone
+                }
+            )
+            return jsonify({"message": "User details inserted successfully"}), 200
 
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
