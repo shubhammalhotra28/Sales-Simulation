@@ -20,7 +20,7 @@ CORS(app)
 def storeUserToDB():
     
     try:
-        request_json = request.json
+        data = request.json
 
         new_user_details = data.get('newUserDetails')
 
@@ -49,7 +49,7 @@ def storeUserToDB():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-        
+
 @app.route(BASE_ROUTE, methods=["PUT"])
 def updateUserInfo():
     

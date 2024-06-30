@@ -1,1 +1,33 @@
-{ "test": "event" }
+{
+    "resource": "/{proxy+}",
+    "path": "/updateUserInfo",
+    "httpMethod": "POST",
+    "headers": {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "Host": "your-api-id.execute-api.your-region.amazonaws.com",
+        "User-Agent": "..."
+    },
+    "queryStringParameters": null,
+    "pathParameters": null,
+    "requestContext": {
+        "accountId": "...",
+        "apiId": "your-api-id",
+        "httpMethod": "POST",
+        "identity": {
+            "accountId": null,
+            "apiKey": null,
+            "caller": null,
+            "cognitoAuthenticationProvider": null,
+            "cognitoAuthenticationType": null,
+            "cognitoIdentityId": null,
+            "cognitoIdentityPoolId": null,
+            "sourceIp": "..."
+        },
+        "resourceId": "...",
+        "resourcePath": "/{proxy+}",
+        "stage": "prod"
+    },
+    "body": "{\"newUserDetails\":{\"name\":\"John Doe\",\"email\":\"john.doe@example.com\",\"phone\":\"1234567890\"}}",
+    "isBase64Encoded": false
+}
