@@ -21,8 +21,6 @@ def postToDB():
 
         return jsonify({'message': 'Data stored successfully'}), 200
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
         
     
 
