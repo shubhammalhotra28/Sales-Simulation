@@ -1,18 +1,43 @@
 # Improvements (TODO):
 <ul>
-<li>hard coded API key can be added within the key vaults</li>
+<li>Hard coded API key can be added within the key vaults</li>
 <li>IAM roles can be enforced</li>
 <li>API's can be further restricted down to use authentication - JWT tokens or IAM role based</li>
-<li>For code - front end could be more better and inline css could be removed while using it globally throughout the project</li>
+<li>For code - front end could be more better and inline CSS could be removed while using it globally throughout the project</li>
 <li>API calls for store can be more fast, if broken down further</li>
 </ul>
-### All these things mentioned above were bypassed because small scale fo project, and can be done if need to add within production
 
+### All these things mentioned above were bypassed because of the small scale of the project, and can be done if needed to add within production.
 
-### Also, added small demonstration of how this works which could be referrred below:
+### Also, added a small demonstration of how this works which could be referred to below:
 ![Short diagram representation](./images/example.png)
 
+---
 
+# Application UI
+
+Here's a preview of how the application looks:
+
+## Landing Page
+![Landing Page](./public/figma/landing.png)
+
+## Task Page
+![Task Page](./public/figma/task.png)
+
+## Recording bar
+![Recording bar](./public/figma/recorder.png)
+
+## Rendering bar
+![Rendering bar Page](./public/figma/rendering.png)
+
+## Feedback Page
+![Feedback Page](./public/figma/feedback.png)
+
+## Deleting Recording Feedback
+![FeedDeleting Recording Feedbackback Page](./public/figma/deleted.png)
+
+
+---
 
 # Getting Started with Create React App
 
@@ -53,7 +78,7 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Learn More
 
