@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      {/* Add content specific to your dashboard */}
+      {/* Further to extend the functionality with more cool stuff but will do later ;) */}
     </div>
   );
 }
