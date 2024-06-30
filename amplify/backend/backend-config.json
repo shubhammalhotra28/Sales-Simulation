@@ -36,7 +36,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "userUpdateInfo"
+          "resourceName": "updateUserInfo"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -79,6 +79,11 @@
       "service": "Lambda"
     },
     "postTake2AiData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updateUserInfo": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"

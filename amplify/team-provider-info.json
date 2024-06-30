@@ -28,7 +28,8 @@
           "deploymentBucketName": "amplify-take2ai-dev-17aa7-deployment",
           "s3Key": "amplify-builds/fetchTake2AiData-6d526c2f426e7a675841-build.zip"
         },
-        "userUpdateInfo": {}
+        "userUpdateInfo": {},
+        "updateUserInfo": {}
       },
       "api": {
         "postTake2AiData": {},

@@ -3,7 +3,7 @@
   "paths": {
     "/updateUserInfo": {
       "name": "/updateUserInfo",
-      "lambdaFunction": "userUpdateInfo",
+      "lambdaFunction": "updateUserInfo",
       "permissions": {
         "setting": "open"
       }

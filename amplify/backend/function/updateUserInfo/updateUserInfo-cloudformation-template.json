@@ -49,13 +49,13 @@
             "FunctionName": {
                 "Fn::If": [
                     "ShouldNotCreateEnvResources",
-                    "userUpdateInfo",
+                    "updateUserInfo",
                     {
 
                         "Fn::Join": [
                             "",
                             [
-                                "userUpdateInfo",
+                                "updateUserInfo",
                                 "-",
                                 {
                                     "Ref": "env"
@@ -80,13 +80,13 @@
                 "RoleName": {
                     "Fn::If": [
                         "ShouldNotCreateEnvResources",
-                        "take2aiLambdaRole32824425",
+                        "take2aiLambdaRoleaf0e8e79",
                         {
 
                             "Fn::Join": [
                                 "",
                                 [
-                                    "take2aiLambdaRole32824425",
+                                    "take2aiLambdaRoleaf0e8e79",
                                     "-",
                                     {
                                         "Ref": "env"
