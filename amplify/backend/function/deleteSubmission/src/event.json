@@ -1,0 +1,50 @@
+{
+    "resource": "/deleteSubmission",
+    "path": "/deleteSubmission",
+    "httpMethod": "DELETE",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "multiValueHeaders": {
+      "Content-Type": [
+        "application/json"
+      ]
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+      "resourceId": "123456",
+      "resourcePath": "/deleteSubmission",
+      "httpMethod": "DELETE",
+      "extendedRequestId": "request-id",
+      "requestTime": "01/Jan/2020:12:00:00 +0000",
+      "path": "/deleteSubmission",
+      "accountId": "123456789012",
+      "protocol": "HTTP/1.1",
+      "stage": "test",
+      "domainPrefix": "testPrefix",
+      "requestTimeEpoch": 1577836800000,
+      "requestId": "c1c2c3c4-5678-90ab-cdef-EXAMPLE11111",
+      "identity": {
+        "cognitoIdentityPoolId": null,
+        "accountId": null,
+        "cognitoIdentityId": null,
+        "caller": null,
+        "sourceIp": "127.0.0.1",
+        "principalOrgId": null,
+        "accessKey": null,
+        "cognitoAuthenticationType": null,
+        "cognitoAuthenticationProvider": null,
+        "userArn": null,
+        "userAgent": "Custom User Agent String",
+        "user": null
+      },
+      "domainName": "testPrefix.testDomainName",
+      "apiId": "1234567890"
+    },
+    "body": "{\"name\":\"Shubham Malhotrattt\",\"phone_number\":\"5859574486\",\"email\":\"sm9971@g.rit.edu\",\"feedback\":\"You provided a clear and concise message. It would be helpful to include more specific details or context to make your message more engaging.\"}",
+    "isBase64Encoded": false
+  }
+  

@@ -1,5 +1,19 @@
 {
   "api": {
+    "deleteSubmission": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "deleteSubmission"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "fetchTake2AiData": {
       "dependsOn": [
         {
@@ -73,6 +87,11 @@
     }
   },
   "function": {
+    "deleteSubmission": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "fetchTake2AiData": {
       "build": true,
       "providerPlugin": "awscloudformation",

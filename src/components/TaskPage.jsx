@@ -109,11 +109,8 @@ const TaskPage = () => {
         level: 'public'
       });
 
-      
-      
       // Update user details
-      // await handleSaveDetails();
-
+      await handleSaveDetails();
 
       const data = await API.post('postTake2AiData', '/postTake2AiData', {
         headers: {},
@@ -126,10 +123,9 @@ const TaskPage = () => {
       });
       console.log(data);
 
-
       console.log('done');
       setIsLoading(false);
-      navigate('/feedback', { state: { candidate: userDetails } });  // Pass updated userDetails data to FeedbackPage
+      navigate('/feedback', { state: { candidate: userDetails, feedbackData: data } });  // Pass updated userDetails data and feedback to FeedbackPage
     } catch (error) {
       console.error('Error uploading audio:', error);
       setIsLoading(false);

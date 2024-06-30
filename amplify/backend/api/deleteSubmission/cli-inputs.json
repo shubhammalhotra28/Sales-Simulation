@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/deleteSubmission": {
+      "name": "/deleteSubmission",
+      "lambdaFunction": "deleteSubmission",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

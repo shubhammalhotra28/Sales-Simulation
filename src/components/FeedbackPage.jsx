@@ -7,8 +7,10 @@ const FeedbackPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const candidate = location.state?.candidate || {};
-  const [score, setScore] = useState(null);
-  const [feedback, setFeedback] = useState('');
+  const feedbackData = location.state?.feedbackData || {};
+  const [score, setScore] = useState(feedbackData.latest_score || null);
+  const [feedback, setFeedback] = useState(feedbackData.latest_feedback || '');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchFeedback = async () => {
@@ -26,17 +28,48 @@ const FeedbackPage = () => {
       }
     };
 
-    fetchFeedback();
-  }, [candidate.email, candidate.name]);
+    if (!feedbackData.latest_feedback) {
+      fetchFeedback();
+    }
+  }, [candidate.email, candidate.name, feedbackData]);
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    console.log(feedback);
+    try {
+      await API.del('deleteSubmission', '/deleteSubmission', {
+        body: {
+          email: candidate.email,
+          name: candidate.name,
+          phone_number: candidate.phone_number,
+          feedback: feedback
+        }
+      });
+      alert('Submission deleted successfully');
+      navigate('/');
+    } catch (error) {
+      console.error('Error deleting submission:', error);
+      alert('Failed to delete submission');
+    }
+    setIsDeleting(false);
+  };
 
   return (
-    <div className="container">
-      <h1 className="heading">Task Feedback</h1>
-      {score !== null && <p className="score">Score: {score}/10</p>}
-      <p className="feedbackTitle">Feedback:</p>
-      <p className="feedbackContent">{feedback}</p>
+    <div className="feedback-container">
+      <h1 className="feedback-heading">Task Feedback</h1>
+      {score !== null && <p className="feedback-score">Score: {score}/10</p>}
+      <p className="feedback-title">Feedback:</p>
+      <p className="feedback-content">{feedback}</p>
       <br />
-      <Link to="/" className="link">Return to Landing Page</Link>
+      <button
+        className="feedback-delete-button"
+        onClick={handleDelete}
+        disabled={isDeleting || feedback === ''}
+      >
+        {isDeleting ? 'Deleting...' : 'Delete Submission'}
+      </button>
+      <br />
+      <Link to="/" className="feedback-link">Return to Landing Page</Link>
     </div>
   );
 };

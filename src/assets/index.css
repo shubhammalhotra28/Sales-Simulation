@@ -119,3 +119,65 @@
     margin-top: 10px;
   }
   
+  /* index.css */
+
+.feedback-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-heading {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .feedback-score {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .feedback-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .feedback-content {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .feedback-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .feedback-delete-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .feedback-delete-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
